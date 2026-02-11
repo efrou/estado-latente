@@ -1,0 +1,62 @@
+/* Custom Styles */
+
+/* Video Container */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    margin: 2rem 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+} 
+
+.buia-services h2{
+    max-width: none;
+}
+
+.festival-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 20px 0;
+}
+
+.festival-list li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+ 
+}
+
+.festival-list li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #666;
+}
+
+.nala-body .nala-team-row .buia-card{
+    background-color: white !important;
+}
+
+.nala-team .buia-card a{
+    color: black !important;
+}
+
+.nala-team .buia-card a h2{
+    color: black !important;
+}
+
+.nala-team .buia-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
