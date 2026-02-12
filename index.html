@@ -221,6 +221,49 @@
   <script>
     let currentImageIndex = 0;
     let currentGallery = [];
+    let isDragging = false;
+
+    // Drag-to-scroll functionality for desktop
+    const sliders = document.querySelectorAll('.gallery-container');
+    
+    sliders.forEach(slider => {
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+      
+      slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('active');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+        isDragging = false; // Reset drag flag on mouse down
+      });
+
+      slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.classList.remove('active');
+      });
+
+      slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.remove('active');
+        // If movement was minimal, treat as click, otherwise drag handled by isDragging flag
+        setTimeout(() => isDragging = false, 50); // Small delay to allow click event to read flag
+      });
+
+      slider.addEventListener('mousemove', (e) => {
+        if(!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2; // Scroll-fast multiplier
+        
+        // If moved more than a few pixels, consider it a drag
+        if (Math.abs(walk) > 5) {
+            isDragging = true;
+            slider.scrollLeft = scrollLeft - walk;
+        }
+      });
+    });
 
     const galleries = {
       miguel: [
@@ -261,6 +304,7 @@
     };
 
     function openCarousel(galleryId, index) {
+      if (isDragging) return; // Prevent opening if it was a drag action
       currentGallery = galleries[galleryId];
       currentImageIndex = index;
       document.getElementById("carouselModal").style.display = "block";

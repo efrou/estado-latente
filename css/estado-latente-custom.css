@@ -34,9 +34,27 @@
         justify-content: center;
         align-items: center;
         flex-wrap: nowrap;
-        overflow-x: auto;
-        padding: 0 20px;
+        padding: 20px; /* Added vertical padding to prevent hover scroll */
         -webkit-overflow-scrolling: touch;
+        
+        /* Enable horizontal scroll but hide scrollbar */
+        overflow-x: auto;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+        cursor: grab; /* Indicate draggable content */
+        
+        /* Ensure items don't shrink */
+        width: 100%;
+    }
+
+    /* Hide scrollbar for Chrome/Safari/Opera */
+    .gallery-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .gallery-container.active {
+        cursor: grabbing;
+        cursor: -webkit-grabbing;
     }
 
     .gallery-item {
@@ -48,9 +66,7 @@
         transition: transform 0.3s ease;
     }
 
-    .gallery-item:hover {
-        transform: scale(1.02);
-    }
+   
 
     .gallery-item img {
         width: 100%;
